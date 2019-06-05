@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add phone</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="static/login/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="static/login/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="static/login/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/login/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" action="/phone_registration" method="post">
+					<span class="login100-form-title p-b-26">
+						Регистрация телефона
+					</span>
+
+					{% for field in text_fields %}
+						{% set name = text_fields[field]["name"] %}
+						{% set var_name = text_fields[field]["var"] %}
+						{% set data_validate = text_fields[field]["data_validate"] %}
+						{% set type = text_fields[field]["type"] %}
+						{% if 'text' in type %}
+							{% if data[var_name] %}
+								{% if data[var_name]['error'] %}
+									<div class="wrap-input100 validate-input alert-validate" data-validate = "{{ data_validate }}">
+								{% else %}
+									<div class="wrap-input100 validate-input" data-validate = "{{ data_validate }}">
+								{% endif %}
+								{% if data[var_name]['data'] %}
+									<input class="input100" type="text" name="{{ var_name }}" value="{{ data[var_name]['data'] }}">
+								{% else %}
+									<input class="input100" type="text" name="{{ var_name }}">
+								{% endif %}
+									<span class="focus-input100" data-placeholder="{{ name }}"></span>
+									</div>
+							{% else %}
+								<div class="wrap-input100 validate-input" data-validate = "{{ data_validate }}">
+									<input class="input100" type="text" name="{{ var_name }}">
+									<span class="focus-input100" data-placeholder="{{ name }}"></span>
+								</div>
+							{% endif %}
+						{% else %}
+							{% set vars = text_fields[field]["values"] %}
+							<div class="wrap-input100 validate-input new-select-style-wpandyou">
+								<select class="input100" name="{{ var_name }}">
+									{% if data[var_name] %}
+										{% for i in vars %}
+											{% if data[var_name]['data'] in i %}
+												<option selected value="{{ i }}">{{ i }}</option>
+											{% else %}
+												<option value="{{ i }}">{{ i }}</option>
+											{% endif %}
+										{% endfor %}
+									{% else %}
+										{% for i in vars %}
+											<option value="{{ i }}">{{ i }}</option>
+										{% endfor %}
+									{% endif %}
+								</select>
+								<span class="focus-input100" data-placeholder="{{ name }}"></span>
+							</div>	
+						{% endif %}
+					{% endfor %}
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button type="submit" class="login100-form-btn">
+								Создать
+							</button>
+						</div>
+                    </div>
+                    
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- <div id="dropDownSelect1"></div> -->
+	
+<!--===============================================================================================-->
+	<script src="static/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/login/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="static/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/login/vendor/daterangepicker/moment.min.js"></script>
+	<script src="static/login/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="static/login/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="static/login/js/main.js"></script>
+
+</body>
+</html>
